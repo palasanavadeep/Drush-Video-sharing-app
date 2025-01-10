@@ -9,7 +9,7 @@ app.on("error" ,(err)=>{
     throw err
 })
 
-app.use("/api",express.static("public/dist"));
+app.use("/",express.static("public/dist"));
 
 const allowedOrigins = [process.env.CORS_ORIGIN, "http://localhost:8000"];
 
