@@ -2,6 +2,7 @@ import express from "express";
 import cookieParser from "cookie-parser";
 import cors from "cors";
 import path from "path";
+import { fileURLToPath } from 'url';
 
 const app = express();
 
@@ -19,15 +20,24 @@ app.use(cors({
     credentials : true
 }))
 
+// Equivalent to __dirname
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+
 // app.use("/",express.static("public/dist"));
 
-// Serve static files from the dist directory
-app.use(express.static(path.join(__dirname, 'public', 'dist')));
+app.use("/", express.static(path.join(__dirname, '..', 'public', 'dist')));
+// app.get("*",(req,res)=>{
+//     res.sendFile("public/dist/index.html");
+// });
 
-// Fallback for serving index.html on non-API routes
-app.get('*', (req, res) => {
-    res.sendFile(path.join(__dirname, 'public', 'dist', 'index.html'));
-});
+
+// // Serve static files from the dist directory
+// app.use(express.static(path.join(__dirname, '..','public', 'dist')));
+
+// // Fallback for serving index.html on non-API routes
+
+
 
 // CORS middleware - apply before any routes
 // app.use(cors({
@@ -67,6 +77,12 @@ app.use("/api/playlist",playlistRouter);
 app.use("/api/subscription",subscriptionRouter);
 app.use("/api/video",videoRouter);
 app.use("/api/dashboard",dashboardRouter);
+
+
+
+app.get('*', (req, res) => {
+    res.sendFile(path.join(__dirname, '..', 'public', 'dist', 'index.html'));
+});
 
 
 export {app};
