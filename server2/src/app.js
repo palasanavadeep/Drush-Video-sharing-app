@@ -26,7 +26,7 @@ const __dirname = path.dirname(__filename);
 
 // app.use("/",express.static("public/dist"));
 
-app.use(express.static(path.join(__dirname, '..', 'public', 'dist')));
+app.use("/app",express.static(path.join(__dirname, '..', 'public', 'dist')));
 // app.get("*",(req,res)=>{
 //     res.sendFile("public/dist/index.html");
 // });
