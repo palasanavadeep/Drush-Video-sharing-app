@@ -9,7 +9,7 @@ app.on("error" ,(err)=>{
     throw err
 })
 
-app.use("/",express.static("public/dist"));
+
 
 const allowedOrigins = [process.env.CORS_ORIGIN, "http://localhost:8000"];
 
@@ -17,6 +17,16 @@ app.use(cors({
     origin : allowedOrigins,
     credentials : true
 }))
+
+// app.use("/",express.static("public/dist"));
+
+// Serve static files from the dist directory
+app.use(express.static(path.join(__dirname, 'public', 'dist')));
+
+// Fallback for serving index.html on non-API routes
+app.get('*', (req, res) => {
+    res.sendFile(path.join(__dirname, 'public', 'dist', 'index.html'));
+});
 
 // CORS middleware - apply before any routes
 // app.use(cors({
