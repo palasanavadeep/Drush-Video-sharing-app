@@ -31,27 +31,6 @@ app.use(express.static(path.join(__dirname, '..', 'public', 'dist')));
 //     res.sendFile("public/dist/index.html");
 // });
 
-
-// // Serve static files from the dist directory
-// app.use(express.static(path.join(__dirname, '..','public', 'dist')));
-
-// // Fallback for serving index.html on non-API routes
-
-
-
-// CORS middleware - apply before any routes
-// app.use(cors({
-//     origin: (origin, callback) => {
-//         // Allow only specified origins, block others
-//         if (allowedOrigins.includes(origin) || !origin) { // Allow localhost during development without origin
-//             callback(null, true);
-//         } else {
-//             callback(new Error('Not allowed by CORS'), false);
-//         }
-//     },
-//     credentials: true, // Allow credentials (cookies, HTTP authentication)
-// }));
-
 // config app about input data type 
 app.use(express.json({limit : "16kb"}));
 app.use(express.urlencoded({limit : "16kb" , extended : true}));
