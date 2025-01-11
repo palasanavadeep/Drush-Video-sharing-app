@@ -4,6 +4,10 @@ import cors from "cors";
 import path from "path";
 import { fileURLToPath } from 'url';
 
+// Equivalent to __dirname
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+
 const app = express();
 
 app.on("error" ,(err)=>{
@@ -11,18 +15,14 @@ app.on("error" ,(err)=>{
     throw err
 })
 
-const allowedOrigins = [process.env.CORS_ORIGIN, "http://localhost:8000"];
+const allowedOrigins = [process.env.CORS_ORIGIN, "http://localhost:5173"];
 
 app.use(cors({
     origin : allowedOrigins,
     credentials : true
 }))
 
-// Equivalent to __dirname
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
 
-// app.use("/",express.static("public/dist"));
 
 app.use(express.static(path.join(__dirname, '..', 'public', 'dist')));
 
@@ -30,9 +30,12 @@ app.get('*', (req, res) => {
     res.sendFile(path.join(__dirname, '..', 'public/dist', 'index.html'));
 });
 
-// app.get("*",(req,res)=>{
-//     res.sendFile("public/dist/index.html");
+
+// app.get('*', (req, res) => {
+//     res.sendFile(path.join(__dirname, '..', 'public/dist', 'index.html'));
 // });
+
+
 
 // config app about input data type 
 app.use(express.json({limit : "16kb"}));
@@ -59,8 +62,6 @@ app.use("/api/playlist",playlistRouter);
 app.use("/api/subscription",subscriptionRouter);
 app.use("/api/video",videoRouter);
 app.use("/api/dashboard",dashboardRouter);
-
-
 
 
 
