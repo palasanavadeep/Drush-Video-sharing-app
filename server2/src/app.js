@@ -26,10 +26,6 @@ app.use(cors({
 
 app.use(express.static(path.join(__dirname, '..', 'public', 'dist')));
 
-app.get('*', (req, res) => {
-    res.sendFile(path.join(__dirname, '..', 'public/dist', 'index.html'));
-});
-
 
 // app.get('*', (req, res) => {
 //     res.sendFile(path.join(__dirname, '..', 'public/dist', 'index.html'));
@@ -63,6 +59,10 @@ app.use("/api/subscription",subscriptionRouter);
 app.use("/api/video",videoRouter);
 app.use("/api/dashboard",dashboardRouter);
 
+
+app.get('*', (req, res) => {
+    res.sendFile(path.join(__dirname, '..', 'public/dist', 'index.html'));
+});
 
 
 
