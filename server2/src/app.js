@@ -11,8 +11,6 @@ app.on("error" ,(err)=>{
     throw err
 })
 
-
-
 const allowedOrigins = [process.env.CORS_ORIGIN, "http://localhost:8000"];
 
 app.use(cors({
@@ -27,6 +25,11 @@ const __dirname = path.dirname(__filename);
 // app.use("/",express.static("public/dist"));
 
 app.use(express.static(path.join(__dirname, '..', 'public', 'dist')));
+
+app.get('*', (req, res) => {
+    res.sendFile(path.join(__dirname, '..', 'public/dist', 'index.html'));
+});
+
 // app.get("*",(req,res)=>{
 //     res.sendFile("public/dist/index.html");
 // });
@@ -59,9 +62,7 @@ app.use("/api/dashboard",dashboardRouter);
 
 
 
-app.get('*', (req, res) => {
-    res.sendFile(path.join(__dirname, '..', 'public', 'dist', 'index.html'));
-});
+
 
 
 export {app};
