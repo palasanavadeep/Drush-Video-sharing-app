@@ -225,6 +225,9 @@ function SignUpPage() {
       formdata.append(key, value);
     });
 
+    log("formdata:", formdata);
+    log("formData:", formData);
+
     try {
       // Check if username already exists
       const usernameResponse = await axios.get(
@@ -233,6 +236,9 @@ function SignUpPage() {
           withCredentials: true,
         }
       );
+
+      console.log("usernameResponse:", usernameResponse.data);
+      
 
       if (!usernameResponse.data.data) {
         window.alert("Username already exists. Please try another username.");
@@ -252,6 +258,7 @@ function SignUpPage() {
       );
 
       if (response.data.success) {
+        log("User registered successfully. Please login to continue.");
         navigate("/signin");
       } else {
         showAlertFromErrorHtml(response.data.data);
