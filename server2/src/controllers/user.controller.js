@@ -34,7 +34,8 @@ const registerUser = asyncHandler(async(req,res) => {
     // check for user creation 
     // remove pass and refreshToken form response 
     // return response
-
+    console.log(req);
+    
     // get user data
     const {username , email , fullName , password} = req.body;  // files are handled in user.routes.js
     // console.log("Username : " , username ," password : " , password);
