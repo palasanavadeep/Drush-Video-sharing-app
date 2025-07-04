@@ -531,6 +531,7 @@ function VideoComments({ videoId }) {
       comments.sort(
         (com1, com2) => new Date(com2.createdAt) - new Date(com1.createdAt)
       );
+      setComments(comments);
     } catch (error) {
       console.error("Error loading comments:", error);
     } finally {

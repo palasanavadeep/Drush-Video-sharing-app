@@ -22,7 +22,7 @@ function VideoCard({ video }) {
         <img
           src={`${video.thumbnail}`}
           alt="Video Thumbnail"
-          className="w-full object-cover min-h-52 max-h-60 justify-center text-center "
+          className="w-full object-cover h-44 justify-center text-center "
         />
         <span className="absolute bottom-2 right-2 bg-gray-800 bg-opacity-75 text-white text-sm font-semibold px-2 py-1 rounded">
           {video.duration.toFixed(2)}
